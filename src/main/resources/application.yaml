@@ -17,7 +17,7 @@ spring:
   datasource:
     platform: postgres
     url: jdbc:postgresql://ec2-54-83-50-174.compute-1.amazonaws.com:5432/db1l075j0f3ocn
-    username: 5432
+    username: dqpvujlkczifzq
     password: 9f4ff93fe2a4d294f26103cac17f0b6fb8d89cd699bc05bd983ff84159ab202d
   properties:
     hibernate:

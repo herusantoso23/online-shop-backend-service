@@ -58,12 +58,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Map<String, Object> getAll(Integer page, Integer limit, String sortBy, String direction) {
+    public Map<String, Object> getAll(Integer page, Integer limit, String sortBy, String direction, String productName, String category) {
         sortBy = StringUtils.isEmpty(sortBy) ? "creationDate" : sortBy;
         direction = StringUtils.isEmpty(direction) ? "desc" : direction;
+        productName = StringUtils.isBlank(productName) ? "%" : "%" + productName + "%";
+        category = StringUtils.isBlank(category) ? "%" : "%" + category + "%";
 
         Pageable pageable = PageRequest.of(page,limit, PaginationUtil.getSortBy(direction),sortBy);
-        Page<Product> resultPage = productRepository.findByDeletedFalse(pageable);
+        Page<Product> resultPage = productRepository.findByNameLikeIgnoreCaseAndCategoryLikeIgnoreCaseAndDeletedFalse(
+                productName, category, pageable);
         Collection<ProductListDTO> vos = resultPage.getContent().stream()
                 .map(entity -> ProductMapper.INSTANCE.toDTO(entity, new ProductListDTO()))
                 .collect(Collectors.toCollection(LinkedList::new));

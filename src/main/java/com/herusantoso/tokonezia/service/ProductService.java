@@ -11,7 +11,7 @@ public interface ProductService {
 
     Boolean update(String id, ProductDTO productDTO);
 
-    Map<String, Object> getAll(Integer page, Integer limit, String sortBy, String direction);
+    Map<String, Object> getAll(Integer page, Integer limit, String sortBy, String direction, String productName, String category);
 
     ProductDetailDTO getDetail(String id);
 

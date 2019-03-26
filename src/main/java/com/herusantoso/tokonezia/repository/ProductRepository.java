@@ -14,6 +14,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Optional<Product> findOneBySecureId(String secureId);
 
-    Page<Product> findByDeletedFalse(Pageable pageable);
+    Page<Product> findByNameLikeIgnoreCaseAndCategoryLikeIgnoreCaseAndDeletedFalse(String productName, String category, Pageable pageable);
 	
 }

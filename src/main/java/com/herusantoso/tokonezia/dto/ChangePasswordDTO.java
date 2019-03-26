@@ -20,5 +20,4 @@ public class ChangePasswordDTO {
     @JsonProperty(value = "confirm_password")
     private String confirmPassword;
 
-
 }

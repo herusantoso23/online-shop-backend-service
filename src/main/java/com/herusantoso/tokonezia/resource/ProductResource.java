@@ -21,6 +21,7 @@ public class ProductResource {
     @Autowired
     private ProductService productService;
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/product")
     public ResponseEntity<ResultDTO> createProduct(@Valid @RequestBody ProductDTO productDTO) {
         RequestHandler handler = new RequestHandler() {
@@ -57,13 +58,14 @@ public class ProductResource {
         return handler.getResult();
     }
 
-    @PreAuthorize("isAuthenticated()")
     @GetMapping("/product")
     public ResponseEntity<ResultPageDTO> getAllProduct(@RequestParam(value = "page", required = true, defaultValue = "0") Integer page,
-                                                        @RequestParam(value = "limit", required = true, defaultValue = "10") Integer limit,
-                                                        @RequestParam(value = "sortBy", required = false) String sortBy,
-                                                        @RequestParam(value = "direction", required = false) String direction) {
-        Map<String, Object> pageMap = productService.getAll(page, limit, sortBy, direction);
+                                                       @RequestParam(value = "limit", required = true, defaultValue = "10") Integer limit,
+                                                       @RequestParam(value = "sortBy", required = false) String sortBy,
+                                                       @RequestParam(value = "direction", required = false) String direction,
+                                                       @RequestParam(value = "productName", required = false) String productName,
+                                                       @RequestParam(value = "category", required = false) String category) {
+        Map<String, Object> pageMap = productService.getAll(page, limit, sortBy, direction, productName, category);
         return RequestHandler.constructListResult(pageMap);
     }
 

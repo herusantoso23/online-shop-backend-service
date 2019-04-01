@@ -27,4 +27,7 @@ public class UserDetailDTO extends IdDTO{
     @Size(max = 1000)
     @JsonProperty(value = "profile_image")
     private String profileImage;
+
+    @JsonProperty(value = "balance")
+    private String balance;
 }
